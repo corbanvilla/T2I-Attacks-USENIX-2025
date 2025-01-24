@@ -1,0 +1,32 @@
+services:
+  notebook:
+    build:
+      context: ./docker
+    container_name: notebook
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_TOKEN: "T2I-USENIX-rubpGTNAzgd4tgk7npb"
+      POSTGRES_DB: "t2i-attacks"
+      POSTGRES_HOST: "postgres"
+      POSTGRES_USER: "animcogn"
+      POSTGRES_PASSWORD: "wnx8nfg5ekeHFH35ymx"
+      NB_UID: "${NB_UID}"
+      NB_GID: "${NB_GID}"
+    volumes:
+      - .:/home/jovyan/work
+    command: start-notebook.py --ServerApp.root_dir=/home/jovyan/work
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: animcogn
+      POSTGRES_PASSWORD: wnx8nfg5ekeHFH35ymx
+      POSTGRES_DB: t2i-attacks
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./datasets/postgres:/docker-entrypoint-initdb.d
+      - ./db_data_postgres:/var/lib/postgresql/data
+    restart: unless-stopped
