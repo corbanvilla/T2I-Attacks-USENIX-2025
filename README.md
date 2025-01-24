@@ -99,7 +99,7 @@ To begin exploring the database, please refer to the following Jupyter notebooks
 
 ## Encrypted Prompts
 
-In accordance with ethical standards set by prior work [[1](https://github.com/Yuchen413/text2image_safety),[2](https://github.com/YitingQu/unsafe-diffusion)], we have encrypted the toxic prompts utilized in our experiments (`datasets/prompts/prompts.zip`, `datasets/postgres/unredacted.sql.zip`). The encryption key is available upon request.
+In accordance with ethical standards set by prior work [[1](https://github.com/Yuchen413/text2image_safety),[2](https://github.com/YitingQu/unsafe-diffusion)], we have encrypted the toxic prompts utilized in our experiments (`datasets/prompts/prompts.zip`, `datasets/postgres/unredacted.sql.zip`). The encryption key is available upon request (corban.villa@nyu.edu).
 
 Harmful prompts in the database (`datasets/postgres/redacted.sql`) are nulled out to prevent unintentional exposure, and include a corresponding prompt hash field that allows for pseudonymous identification for database joins.
 

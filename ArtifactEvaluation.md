@@ -31,6 +31,12 @@ git clone https://github.com/corbanvilla/T2I-Attacks-USENIX-2025.git
 cd T2I-Attacks-USENIX-2025
 ```
 
+To setup the project environment, execute the following script:
+
+```bash
+./setup.sh
+```
+
 Load the PostgreSQL database dump:
 ```bash
 docker compose up -d postgres
