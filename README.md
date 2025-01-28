@@ -16,6 +16,7 @@ Relevant artifacts are organized into the following key directories:
 T2I Attacks
 ├── README.md
 ├── setup.sh              // Setup script for project configurations.
+├── dbclient.sh           // Execute SQL queries directly against the database.
 ├── ArtifactEvaluation.md // Detailed instructions on reproducing key results (in-progress).
 ├── docker-compose.yml    // Database and Jupyter notebook environment.
 ├── datasets
@@ -23,9 +24,8 @@ T2I Attacks
 │   ├── postgres          // All experiment data (prompts, response times, requests, etc).
 │   └── prompts           // Image prompts used in the experiments.
 └── src
-    ├── 1_blackbox        // Blackbox DALL-E Analysis notebooks.
-    ├── 2_graybox         // Graybox DALL-E Analysis notebooks.
-    └── 3_countermeasures // Countermeasures against T2I attacks.
+    ├── examples.ipynb    // Notebook with example queries for the database.
+    └── paper             // Notebook files to reproduce the paper results.
 ```
 
 
@@ -80,8 +80,8 @@ Access the Jupyter notebook at the provided address:
 
 To begin exploring the database, please refer to the following Jupyter notebooks:
 
-- **Basic Query Syntax:** [`src/1_blackbox/examples.ipynb`](src/1_blackbox/examples.ipynb)
-- **Dataset Exploration:** [`src/1_blackbox/exporatory_questions.ipynb`](src/1_blackbox/exporatory_questions.ipynb)
+- **Basic Query Syntax:** [`src/examples.ipynb`](src/examples.ipynb)
+- **Reproduce Paper Results:** [`src/paper`](src/paper)
 
 
 ## Cite Us
