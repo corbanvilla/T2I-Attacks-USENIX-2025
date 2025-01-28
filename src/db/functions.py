@@ -6,6 +6,8 @@ All functions defined in `_functions` are created by `client.py`.
 
 from sqlalchemy.sql import func
 
+sql_coalesce = func.coalesce
+sql_count = func.count
 sql_norm = func.norm
 slq_similarity = func.similarity
 sql_encode = func.encode
