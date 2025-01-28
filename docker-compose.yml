@@ -7,9 +7,9 @@ services:
       - "8888:8888"
     environment:
       JUPYTER_TOKEN: "T2I-USENIX-rubpGTNAzgd4tgk7npb"
-      POSTGRES_DB: "t2i-attacks"
-      POSTGRES_HOST: "postgres"
-      POSTGRES_USER: "animcogn"
+      POSTGRES_DB: t2i-attacks
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: animcogn
       POSTGRES_PASSWORD: "wnx8nfg5ekeHFH35ymx"
       NB_UID: "${NB_UID}"
       NB_GID: "${NB_GID}"
