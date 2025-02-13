@@ -5,12 +5,14 @@ source "$(dirname "$0")/config.sh"
 
 # Check if unzip is installed
 if ! command -v unzip &> /dev/null; then
-    print_warning "unzip is not installed"
+    print_error "unzip is not installed"
     read -p "Would you like to install unzip? (y/N) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         print_info "Installing unzip..."
-        if ! sudo apt update && sudo apt install -y unzip; then
+        sudo apt update
+        sudo apt install -y unzip
+        if [ $? -ne 0 ]; then
             print_error "Failed to install unzip"
             exit 1
         fi
