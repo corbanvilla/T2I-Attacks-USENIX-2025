@@ -20,17 +20,16 @@ Relevant artifacts are organized into the following key directories:
 ```js
 T2I Attacks
 ├── README.md
-├── setup.sh              // Setup script for project configurations.
-├── dbclient.sh           // Execute SQL queries directly against the database.
-├── ArtifactEvaluation.md // Detailed instructions on reproducing key results (in-progress).
-├── docker-compose.yml    // Database and Jupyter notebook environment.
+├── ArtifactEvaluation.md   // Detailed instructions on reproducing key results.
+├── docker-compose.yml      // Database and Jupyter notebook environment.
 ├── datasets
-│   ├── graybox           // Dataset collected from the ChatGPT/Interface.
-│   ├── postgres          // All experiment data (prompts, response times, requests, etc).
-│   └── prompts           // Image prompts used in the experiments.
+│   ├── graybox             // Dataset collected from the ChatGPT/Interface.
+│   ├── postgres            // All experiment data (prompts, response times, requests, etc).
+│   └── prompts             // Image prompts used in the experiments.
 └── src
-    ├── examples.ipynb    // Notebook with example queries for the database.
-    └── paper             // Notebook files to reproduce the paper results.
+    ├── artifact_evaluation // Scripts to conduct artifact evaluation experiments.
+    ├── examples.ipynb      // Notebook with example queries for the database.
+    └── paper               // Notebook files to reproduce the paper results.
 ```
 
 
@@ -45,7 +44,7 @@ cd T2I-Attacks-USENIX-2025
 To setup the project environment, execute the following script:
 
 ```bash
-./setup.sh
+./scripts/setup.sh
 ```
 
 Load the PostgreSQL database dump:
@@ -110,7 +109,7 @@ Harmful prompts in the database (`datasets/postgres/redacted.sql`) are nulled ou
 
 To decrypt the prompts with the provided decryption key, please execute the following script:
 ```bash
-./decrypt.sh
+./scripts/decrypt.sh
 ```
 
 
