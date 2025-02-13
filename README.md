@@ -4,7 +4,7 @@ This repository contains the code, dataset, and analysis for the USENIX 2025 pap
 
 
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14754827.svg)](https://doi.org/10.5281/zenodo.14754827)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14735417.svg)](https://doi.org/10.5281/zenodo.14735417)
 
 
 
@@ -121,7 +121,7 @@ While we do propose a number of novel attacks for T2I systems, we also introduce
 
 ## Open Science
 
-All code and timing dataset artifacts related to this work will be published. A permanent and immutable version of these are available at: [https://doi.org/10.5281/zenodo.14754827](https://doi.org/10.5281/zenodo.14754827).
+All code and timing dataset artifacts related to this work will be published. A permanent and immutable version of these are available at: [https://doi.org/10.5281/zenodo.14735417](https://doi.org/10.5281/zenodo.14735417).
 
 ## License
 
