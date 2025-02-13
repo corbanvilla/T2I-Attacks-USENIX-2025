@@ -6,8 +6,8 @@ BACKUP_DIR=./backups
 BACKUP_FILE=$BACKUP_DIR/dump_`date +%Y-%m-%d"_"%H_%M_%S`
 
 POSTGRES_CONTAINER=$(docker compose ps | grep postgres | cut -d' ' -f1)
-POSTGRES_USERNAME=$(cat $DOCKER_COMPOSE | grep POSTGRES_USER | cut -d':' -f2 | tr -d ' ')
-POSTGRES_DATABASE=$(cat $DOCKER_COMPOSE | grep POSTGRES_DB | cut -d':' -f2 | tr -d ' ')
+POSTGRES_USERNAME=$(cat $DOCKER_COMPOSE | grep POSTGRES_USER | tail -n1 | cut -d':' -f2 | tr -d ' ')
+POSTGRES_DATABASE=$(cat $DOCKER_COMPOSE | grep POSTGRES_DB | tail -n1 | cut -d':' -f2 | tr -d ' ')
 
 if [ -z "$POSTGRES_CONTAINER" ]; then
     echo "Postgres container not running!"

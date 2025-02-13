@@ -16,3 +16,4 @@ venv/
 *.log
 .env
 .env.*
+src/ae_db/

@@ -8,3 +8,4 @@ seaborn==0.13.2
 scikit-learn==1.5.1
 requests==2.32.3
 python-dotenv==1.0.1
+loguru==0.7.3

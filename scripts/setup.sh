@@ -29,19 +29,12 @@ else
     echo "Info: .env file exists. Not creating."
 fi
 
-# Check for datasets/postgres/redacted.sql, if not found, unzip
-if [ ! -f datasets/postgres/redacted.sql ]; then
-
-    # Check to make sure datasets/postgres/unredacted.sql does not exist
-    if [ -f datasets/postgres/unredacted.sql ]; then
-        echo "Info: datasets/postgres/unredacted.sql exists. Not unzipping datasets/postgres/redacted.sql"
-        exit 1
-    else
-        echo "Info: Unzipping datasets/postgres/redacted.sql"
-        unzip datasets/postgres/redacted.sql.zip -d datasets/postgres
-    fi
+# Check for existing sql, if not found, unzip
+if ! ls datasets/postgres/*.sql 1> /dev/null 2>&1; then
+    echo "Info: Unzipping datasets/postgres/redacted.sql"
+    unzip datasets/postgres/redacted.sql.zip -d datasets/postgres
 else
-    echo "Info: datasets/postgres/redacted.sql exists. Not unzipping."
+    echo "Info: Existing SQL file found. Not unzipping redacted.sql.zip."
 fi
 
 echo "Info: Setup complete."

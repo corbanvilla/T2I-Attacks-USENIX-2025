@@ -2,19 +2,20 @@ import json
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import matplotlib
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import matplotlib.cm as cm
 import matplotlib.ticker as ticker
 import calendar
+import scipy.stats as stats
+
 from datetime import datetime
 from matplotlib.font_manager import FontProperties
 from matplotlib.lines import Line2D
 
-sns.set_theme(context="paper", font="Times New Roman", font_scale=1.2)
-plt.rcParams["font.family"] = "serif"
-plt.rcParams["font.serif"] = ["Times New Roman"] + plt.rcParams["font.serif"]
-plt.rcParams["font.size"] = 12
+sns.set_theme(context="paper", font_scale=1.4, style="white")
 
 # Set the palette
 sns.color_palette()

@@ -3,6 +3,11 @@
 This repository contains the code, dataset, and analysis for the USENIX 2025 paper: [Exposing the Guardrails: Reverse-Engineering and Jailbreaking Safety Filters in DALL·E Text-to-Image Pipelines](). 
 
 
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14754827.svg)](https://doi.org/10.5281/zenodo.14754827)
+
+
+
 ## Artifact Evaluation (Phase 2: Reproducible)
 
 Find details on reproducing the results in [ArtifactEvaluation.md](ArtifactEvaluation.md) section.
@@ -88,7 +93,7 @@ To begin exploring the database, please refer to the following Jupyter notebooks
 
 ```bibtex
 @inproceedings{villaExposingGuardrailsReverseEngineering2025,
-  title = {Exposing the {{Guardrails}}: {{Reverse-Engineering}} and {{Jailbreaking Safety Filters}} in {{DALL}}{$\cdot$}{{E Text-to-Image Pipelines}}},
+  title = {Exposing the {{Guardrails}}: {{Reverse-Engineering}} and {{Jailbreaking Safety Filters}} in {{DALL·E Text-to-Image Pipelines}}},
   booktitle = {34th {{USENIX Security Symposium}}},
   author = {Villa, Corban and Mirza, Shujaat and P{\"o}pper, Christina},
   year = {2025},
@@ -117,7 +122,7 @@ While we do propose a number of novel attacks for T2I systems, we also introduce
 
 ## Open Science
 
-All code and timing dataset artifacts related to this work will be published. A permanent and immutable version of these are available at: [http://zenodo...]().
+All code and timing dataset artifacts related to this work will be published. A permanent and immutable version of these are available at: [https://doi.org/10.5281/zenodo.14754827](https://doi.org/10.5281/zenodo.14754827).
 
 ## License
 

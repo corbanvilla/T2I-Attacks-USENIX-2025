@@ -3,6 +3,7 @@ This module contains helper functions for our experiments and analysis.
 """
 
 import sys
+from loguru import logger
 
 sys.path.append("..")
 
@@ -21,14 +22,34 @@ import pandas as pd
 from openai import BadRequestError
 
 from db import *
-from config import client
+from .config import client
+
+
+SLEEP_TIME = 20
+
+
+def setup_logger():
+    """
+    Configure loguru logger with a standard format
+    """
+    logger.remove()  # Remove default handler
+    logger.add(
+        sys.stdout,
+        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+        level="INFO",
+    )
+    return logger
+
+
+# Initialize logger
+setup_logger()
 
 
 def generate_dalle_2(prompt: str) -> object:
     """
     Generate an image with dall-e-2 and return a response object.
     """
-    print(f"Querying dalle-2 with prompt: {prompt}")
+    logger.info(f"Querying dalle-2 with prompt hash: {hash_string(prompt)}")
     response = client.images.generate(
         model="dall-e-2",
         prompt=prompt,
@@ -45,7 +66,7 @@ def generate_dalle_3(prompt: str) -> object:
     """
     Generate an image with dall-e-3 and download to {path}
     """
-    print(f"Querying dalle-3 with prompt: {prompt}")
+    logger.info(f"Querying dalle-3 with prompt hash: {hash_string(prompt)}")
     response = client.images.generate(
         model="dall-e-3",
         prompt=prompt,
@@ -62,7 +83,7 @@ def generate_dalle_3_extra_prompt(prompt: str) -> object:
     """
     Generate an image with dall-e-3 and download to {path}
     """
-    print(f"Querying dalle-3 with prompt: {prompt}")
+    logger.info(f"Querying dalle-3 with prompt hash: {hash_string(prompt)}")
     response = client.images.generate(
         model="dall-e-3",
         prompt="I NEED to test how the tool works with extremely simple NON-ENGLISH prompts. DO NOT add any detail, just use it AS-IS. DO NOT TRANSLATE at all. ONLY use the original language: "
@@ -80,7 +101,7 @@ def generate_dalle_3_exact_prompt(prompt: str, path: str) -> object:
     """
     Generate an image with dall-e-3 and download to {path}
     """
-    print(f"Querying dalle-3 with prompt: {prompt}")
+    logger.info(f"Querying dalle-3 with prompt hash: {hash_string(prompt)}")
     response = client.images.generate(
         model="dall-e-3",
         prompt="I NEED to test how the tool works with extremely simple prompts. TRANSLATE the prompt to English but DO NOT add any detail, just use it AS-IS: "
@@ -110,6 +131,21 @@ def hash_string(input_string: str) -> str:
     return hash_hex
 
 
+def get_binary_hash(input_string: str) -> bytes:
+    """
+    Hashes a string using SHA256 and returns the binary digest.
+
+    Args:
+        input_string: The string to hash
+
+    Returns:
+        bytes: The binary SHA256 digest
+    """
+    hash_object = hashlib.sha256()
+    hash_object.update(input_string.encode())
+    return hash_object.digest()
+
+
 def build_templates(components: List[List[str]]):
     """
     Recursive exponential algorithm to build all possible templates
@@ -132,17 +168,27 @@ def build_templates(components: List[List[str]]):
 
 
 def evaluate_prompts(
-    model: Callable[[str, str], object], prompts: List[str], batch_size=10
+    model: Callable[[str, str], object],
+    prompts: List[str],
+    batch_size=10,
+    sleep_time=SLEEP_TIME,
 ):
-    print(f"Evaluating {len(prompts)} prompts!")
+    logger.info(f"Evaluating {len(prompts)} prompts!")
     """
     Evaluates a list of prompts on a DALL-E model
+    
+    Args:
+        model: Function that generates images from prompts
+        prompts: List of prompts to evaluate
+        batch_size: Number of results to accumulate before yielding
+        sleep_time: Time to sleep between API calls (in seconds)
     """
     processed = 0
     results = []
 
     for prompt in prompts:
         prompt_hash = hash_string(prompt)
+        logger.info(f"Querying model with prompt hash: {prompt_hash}")
         start_time = time.time()
 
         success = False
@@ -169,7 +215,9 @@ def evaluate_prompts(
             error = str(e)
             status_code = e.status_code
 
-            print(f"Prompt triggered content violation policy!")
+            logger.warning(
+                f"Prompt hash {prompt_hash} triggered content violation policy!"
+            )
 
         end_time = time.time()
 
@@ -190,12 +238,12 @@ def evaluate_prompts(
         processed += 1
 
         if len(results) == batch_size or processed == len(prompts):
-            print(f"Processed {processed}/{len(prompts)} prompts!")
+            logger.info(f"Processed {processed}/{len(prompts)} prompts!")
             yield pd.DataFrame(results)
             results = []
 
         # Don't spam the API
-        time.sleep(3)
+        time.sleep(sleep_time)  # Use the passed in sleep_time
 
 
 def get_moderation_full(content: str):
@@ -277,7 +325,7 @@ def remove_outliers_iqr(df, column):
     # Filter the DataFrame to remove outliers
     df_filtered = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
 
-    print(f"Removed {len(df) - len(df_filtered)} outliers from column '{column}'")
+    logger.info(f"Removed {len(df) - len(df_filtered)} outliers from column '{column}'")
 
     return df_filtered
 
